@@ -1,21 +1,7 @@
 # HttpServerDemo
 
-**TODO: Add description**
+Thanks: [https://blog.appsignal.com/2019/01/22/serving-plug-building-an-elixir-http-server.html](https://blog.appsignal.com/2019/01/22/serving-plug-building-an-elixir-http-server.html)
 
-## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `http_server_demo` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:http_server_demo, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/http_server_demo](https://hexdocs.pm/http_server_demo).
-
+**Notice:**
+Please set `content-length` in header when you following this [https://blog.appsignal.com/2019/01/22/serving-plug-building-an-elixir-http-server.html](https://blog.appsignal.com/2019/01/22/serving-plug-building-an-elixir-http-server.html)
