@@ -14,3 +14,6 @@ Elixir Daily
 [![asciicast](https://asciinema.org/a/QhJgC7n9F94DHrwYOebhdDw3W.svg)](https://asciinema.org/a/QhJgC7n9F94DHrwYOebhdDw3W)
 
 02-02: [🤚撸Http Server 摇摆的章鱼](/http_server_demo)
+
+02-02: [Port 调用外部任务](/ports_demo)
+[![asciicast](https://asciinema.org/a/3a5JfYFOsPpNOEGlRc94U0lCm.svg)](https://asciinema.org/a/3a5JfYFOsPpNOEGlRc94U0lCm)
