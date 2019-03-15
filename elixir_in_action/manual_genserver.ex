@@ -23,20 +23,25 @@ defmodule ServerProcess do
 
   def loop(callback_module, current_state) do
     receive do
-      {request, caller} ->
+      {:call, request, caller} ->
         {response, new_state} = callback_module.handle_call(request, current_state)
         send(caller, {:response, response})
+        loop(callback_module, new_state)
+      {:cast, request} ->
+        new_state = callback_module.handle_cast(request, current_state)
         loop(callback_module, new_state)
     end
   end
 
   def call(server_pid, request) do
-    send(server_pid, {request, self()})
+    send(server_pid, {:call, request, self()})
 
     receive do
       {:response, response} -> response
     end
   end
+
+  def cast(server_pid, request), do: send(server_pid, {:cast, request})
 end
 
 defmodule KVStore do
@@ -45,7 +50,7 @@ defmodule KVStore do
   end
 
   def put(pid, k, v) do
-    ServerProcess.call(pid, {:put, k, v})
+    ServerProcess.cast(pid, {:put, k, v})
   end
 
   def get(pid, k) do
@@ -56,9 +61,7 @@ defmodule KVStore do
     %{}
   end
 
-  def handle_call({:put, k, v}, state) do
-    {:ok, Map.put(state, k, v)}
-  end
+  def handle_cast({:put, k, v}, state), do: Map.put(state, k, v)
 
   def handle_call({:get, k}, state) do
     {Map.get(state, k), state}
