@@ -1,0 +1,5 @@
+# ProcessLargeHttpResponse
+
+```elixir
+ProcessLargeHttpResponse.download()
+```
