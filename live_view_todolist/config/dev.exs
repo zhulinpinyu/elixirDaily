@@ -52,7 +52,8 @@ config :live_view_todolist, LiveViewTodolistWeb.Endpoint,
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/live_view_todolist_web/views/.*(ex)$},
-      ~r{lib/live_view_todolist_web/templates/.*(eex)$}
+      ~r{lib/live_view_todolist_web/templates/.*(eex)$},
+      ~r{lib/live_view_todolist_web/live/.*(ex)$}
     ]
   ]
 
