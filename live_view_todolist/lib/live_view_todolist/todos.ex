@@ -53,6 +53,7 @@ defmodule LiveViewTodolist.Todos do
     %Todo{}
     |> Todo.changeset(attrs)
     |> Repo.insert()
+    |> broadcast_change([:todo, :created])
   end
 
   @doc """
@@ -71,6 +72,7 @@ defmodule LiveViewTodolist.Todos do
     todo
     |> Todo.changeset(attrs)
     |> Repo.update()
+    |> broadcast_change([:todo, :updated])
   end
 
   @doc """
@@ -86,7 +88,9 @@ defmodule LiveViewTodolist.Todos do
 
   """
   def delete_todo(%Todo{} = todo) do
-    Repo.delete(todo)
+    todo
+    |> Repo.delete()
+    |> broadcast_change([:todo, :deleted])
   end
 
   @doc """
@@ -100,5 +104,15 @@ defmodule LiveViewTodolist.Todos do
   """
   def change_todo(%Todo{} = todo) do
     Todo.changeset(todo, %{})
+  end
+
+  @topic inspect(__MODULE__)
+  def subscribe do
+    Phoenix.PubSub.subscribe(LiveViewTodolist.PubSub, @topic)
+  end
+
+  defp broadcast_change({:ok, result}, event) do
+    Phoenix.PubSub.broadcast(LiveViewTodolist.PubSub, @topic, {__MODULE__, event, result})
+    {:ok, result}
   end
 end
