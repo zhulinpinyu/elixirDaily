@@ -52,7 +52,8 @@ config :user_liveview, UserLiveviewWeb.Endpoint,
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/user_liveview_web/views/.*(ex)$},
-      ~r{lib/user_liveview_web/templates/.*(eex)$}
+      ~r{lib/user_liveview_web/templates/.*(eex)$},
+      ~r{lib/user_liveview_web/live/.*(ex)$}
     ]
   ]
 
