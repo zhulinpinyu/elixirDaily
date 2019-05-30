@@ -24,7 +24,6 @@ defmodule UserLiveviewWeb do
       import Plug.Conn
       import UserLiveviewWeb.Gettext
       alias UserLiveviewWeb.Router.Helpers, as: Routes
-      import Phoenix.LiveView, only: [live_render: 2, live_render: 3]
     end
   end
 
@@ -36,7 +35,7 @@ defmodule UserLiveviewWeb do
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
-
+      import Phoenix.LiveView, only: [live_render: 2, live_render: 3]
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 

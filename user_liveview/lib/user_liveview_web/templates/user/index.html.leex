@@ -1,0 +1,30 @@
+<h1>Listing Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone number</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for user <- @users do %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.phone_number %></td>
+
+      <td>
+        <%#= link "Show", to: Routes.live_path(@socket, :show, user) %>
+        <%#= link "Edit", to: Routes.live_path(@socket, :edit, user) %>
+        <%#= link "Delete", to: Routes.live_path(@socket, :delete, user), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New User", to: Routes.live_path(@socket, UserLive.New) %></span>
