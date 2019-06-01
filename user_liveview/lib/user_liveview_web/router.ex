@@ -20,7 +20,7 @@ defmodule UserLiveviewWeb.Router do
     live "/", UserLive.Index
     live "/users", UserLive.Index
     live "/users/new", UserLive.New
-    # live "/users/:id", UserLive.Show
+    live "/users/:id", UserLive.Show
     # live "/users/:id/edit", UserLive.Edit
   end
 
