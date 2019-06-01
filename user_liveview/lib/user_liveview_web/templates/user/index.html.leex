@@ -20,7 +20,12 @@
       <td>
         <%#= link "Show", to: Routes.live_path(@socket, :show, user) %>
         <%#= link "Edit", to: Routes.live_path(@socket, :edit, user) %>
-        <%#= link "Delete", to: Routes.live_path(@socket, :delete, user), method: :delete, data: [confirm: "Are you sure?"] %>
+        <%= link "Delete",
+          to: "#",
+          phx_click: "delete",
+          phx_value: user.id,
+          data: [confirm: "Are you sure?"]
+        %>
       </td>
     </tr>
 <% end %>

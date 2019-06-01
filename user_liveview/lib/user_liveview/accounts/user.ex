@@ -10,7 +10,7 @@ defmodule UserLiveview.Accounts.User do
     timestamps()
   end
 
-  @phone ~r/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/
+  @phone ~r/^\d{11}$/
   @email ~r/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   @doc false
