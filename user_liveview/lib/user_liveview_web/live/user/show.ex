@@ -11,5 +11,4 @@ defmodule UserLiveviewWeb.UserLive.Show do
   def render(assigns) do
     UserView.render("show.html", assigns)
   end
-
 end

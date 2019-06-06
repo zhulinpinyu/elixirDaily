@@ -21,7 +21,7 @@ defmodule UserLiveviewWeb.Router do
     live "/users", UserLive.Index
     live "/users/new", UserLive.New
     live "/users/:id", UserLive.Show
-    # live "/users/:id/edit", UserLive.Edit
+    live "/users/:id/edit", UserLive.Edit
   end
 
   # Other scopes may use custom stacks.
