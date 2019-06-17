@@ -1,6 +1,10 @@
 defmodule Minimal.Application do
   def start(:normal, []) do
-    IO.puts "Hello Coco."
-    {:ok, self()}
+    Supervisor.start_link(
+      [
+        MinimalWeb.Endpoint
+      ],
+      strategy: :one_for_one
+    )
   end
 end
