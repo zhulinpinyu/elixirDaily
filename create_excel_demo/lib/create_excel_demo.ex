@@ -1,5 +1,5 @@
 defmodule CreateExcelDemo do
-  alias Elixlsx.{Workbook,Sheet}
+  alias Elixlsx.{Workbook, Sheet, Image}
   @moduledoc """
   Documentation for `CreateExcelDemo`.
   """
@@ -23,5 +23,21 @@ defmodule CreateExcelDemo do
 
     Workbook.append_sheet(%Workbook{}, sheet)
     |> Elixlsx.write_to("hello.xlsx")
+  end
+
+  def gen do
+    sheet = %Sheet{
+      name: "Sheet1",
+      rows: [["条形码", "标签", "图片"],["123", "123"],["123", "123"]],
+      col_widths: %{3 => 22}, #1开始
+      row_heights: %{2 => 200, 3 => 200}, #1开始
+      images: [
+        Image.new(Path.expand("../190901.jpg",__DIR__), 1, 2), #0开始
+        Image.new(Path.expand("../190901.jpg",__DIR__), 2, 2)
+      ]
+    }
+
+    %Workbook{sheets: [sheet]}
+    |> Elixlsx.write_to("gen.xlsx")
   end
 end
