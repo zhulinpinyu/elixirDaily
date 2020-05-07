@@ -48,7 +48,8 @@ defmodule Quantum.MixProject do
       {:phoenix_live_view, "~> 0.10.0"},
       {:floki, ">= 0.0.0", only: :test},
       {:telemetry, "~> 0.4.1"},
-      {:statix, ">= 0.0.0"}
+      {:telemetry_metrics, "~> 0.4"},
+      {:telemetry_metrics_statsd, "~> 0.3.0"}
     ]
   end
 
