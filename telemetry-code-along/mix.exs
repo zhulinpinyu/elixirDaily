@@ -46,7 +46,9 @@ defmodule Quantum.MixProject do
       {:comeonin, "~> 5.0"},
       {:bcrypt_elixir, "~> 2.0"},
       {:phoenix_live_view, "~> 0.10.0"},
-      {:floki, ">= 0.0.0", only: :test}
+      {:floki, ">= 0.0.0", only: :test},
+      {:telemetry, "~> 0.4.1"},
+      {:statix, ">= 0.0.0"}
     ]
   end
 
