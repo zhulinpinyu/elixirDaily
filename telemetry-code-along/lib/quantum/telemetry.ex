@@ -24,11 +24,20 @@ defmodule Quantum.Telemetry do
         "phoenix.router_dispatch.stop.count",
         tag_values: &__MODULE__.endpoint_metadata/1,
         tags: [:plug, :plug_opts, :status]
+      ),
+      counter(
+        "phoenix.error_rendered.count",
+        tag_values: &__MODULE__.error_rendered_metadata/1,
+        tags: [:status, :request_path]
       )
     ]
   end
 
   def endpoint_metadata(%{conn: %{status: status}, plug: plug, plug_opts: plug_opts}) do
     %{ status: status, plug: plug, plug_opts: plug_opts }
+  end
+
+  def error_rendered_metadata(%{conn: %{request_path: request_path}, status: status}) do
+    %{status: status, request_path: request_path}
   end
 end
