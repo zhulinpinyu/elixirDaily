@@ -6,9 +6,9 @@ defmodule Quantum.Telemetry do
     Supervisor.start_link(__MODULE__, arg, name: __MODULE__)
   end
 
-  def init(arg) do
+  def init(_arg) do
     children = [
-      {TelemetryMetricsStatsd, metrics: metrics()}
+      {TelemetryMetricsStatsd, metrics: metrics(), formatter: :datadog}
     ]
     Supervisor.init(children, strategy: :one_for_one)
   end
@@ -16,13 +16,13 @@ defmodule Quantum.Telemetry do
   defp metrics() do
     [
       summary(
-        "phoenix.request.duration",
+        "phoenix.router_dispatch.stop.duration",
         unit: {:native, :millisecond},
-        tags: [:request_path]
+        tags: [:plug, :plug_opts]
       ),
       counter(
-        "phoenix.request.count",
-        tags: [:request_path]
+        "phoenix.router_dispatch.stop.count",
+        tags: [:plug, :plug_opts]
       )
     ]
   end
