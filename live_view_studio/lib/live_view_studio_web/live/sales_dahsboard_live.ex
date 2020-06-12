@@ -4,12 +4,17 @@ defmodule LiveViewStudioWeb.SalesDashboardLive do
   alias LiveViewStudio.Sales
   import Number.Currency
 
-  def mount(_params, _session, socket) do
-    if(connected?(socket)) do
-      :timer.send_interval(1000, self(), :tick)
-    end
+  require OpenTelemetry.Tracer
+  require OpenTelemetry.Counter
 
-    {:ok, assign_stats(socket)}
+  def mount(_params, _session, socket) do
+    OpenTelemetry.Tracer.with_span "sales_dashboard.mount" do
+      if(connected?(socket)) do
+        :timer.send_interval(1000, self(), :tick)
+      end
+
+      {:ok, assign_stats(socket)}
+    end
   end
 
   def render(assigns) do
@@ -44,7 +49,9 @@ defmodule LiveViewStudioWeb.SalesDashboardLive do
   end
 
   def handle_info(:tick, socket) do
-    {:noreply, assign_stats(socket)}
+    OpenTelemetry.Tracer.with_span "sales_dashboard.tick" do
+      {:noreply, assign_stats(socket)}
+    end
   end
 
   defp assign_stats(socket) do

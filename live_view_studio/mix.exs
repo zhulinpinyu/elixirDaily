@@ -48,7 +48,9 @@ defmodule LiveViewStudio.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:faker, "~> 0.13"},
-      {:number, "~> 1.0"}
+      {:number, "~> 1.0"},
+      {:opentelemetry, "~> 0.4.0"},
+      {:opentelemetry_zipkin, "~> 0.2.0"}
     ]
   end
 

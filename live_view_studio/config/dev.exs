@@ -30,6 +30,15 @@ config :live_view_studio, LiveViewStudioWeb.Endpoint,
     ]
   ]
 
+config :opentelemetry, :processors,
+  ot_batch_processor: %{
+    exporter: {:opentelemetry_zipkin,
+      %{
+        address: 'http://localhost:9411/api/v2/spans',
+        local_endpoint: %{service_name: "live_view_studio"}
+      }
+    }
+  }
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed
