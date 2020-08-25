@@ -12,13 +12,13 @@
           <thead>
             <tr>
               <th class="item">
-                Item
+                <%= sort_link(@socket, "Item", :item, @options) %>
               </th>
               <th>
-                Quantity
+                <%= sort_link(@socket, "Quantity", :quantity, @options) %>
               </th>
               <th>
-                Days Until Expires
+                <%= sort_link(@socket, "Days Until Expires", :days_until_expires, @options) %>
               </th>
             </tr>
           </thead>
