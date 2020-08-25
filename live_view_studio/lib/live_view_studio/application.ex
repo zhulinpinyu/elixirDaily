@@ -6,7 +6,7 @@ defmodule LiveViewStudio.Application do
   use Application
 
   def start(_type, _args) do
-    OpenTelemetry.register_application_tracer(:live_view_studio)
+    # OpenTelemetry.register_application_tracer(:live_view_studio)
     children = [
       # Start the Ecto repository
       LiveViewStudio.Repo,
