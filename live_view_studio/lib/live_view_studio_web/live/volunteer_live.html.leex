@@ -19,7 +19,7 @@
     </div>
     <%= submit "添加", phx_disable_with: "正在保存..." %>
   </form>
-  <div id="volunteers">
+  <div id="volunteers" phx-update="prepend">
   <%= for volunteer <- @volunteers do %>
     <div class="volunteer <%= if volunteer.checked_out, do: "out" %>" id="<%= volunteer.id %>">
       <div class="name">

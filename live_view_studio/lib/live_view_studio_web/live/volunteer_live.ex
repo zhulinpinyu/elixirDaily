@@ -5,6 +5,7 @@ defmodule LiveViewStudioWeb.VolunteerLive do
   alias LiveViewStudio.Volunteers.Volunteer
 
   def mount(_params, _session, socket) do
+    if connected?(socket), do: Volunteers.subscribe()
     volunteers = Volunteers.list_volunteers()
     changeset = Volunteers.change_volunteer(%Volunteer{})
 
@@ -20,9 +21,8 @@ defmodule LiveViewStudioWeb.VolunteerLive do
   def handle_event("save", %{"volunteer" => params}, socket) do
     socket =
       case Volunteers.create_volunteer(params) do
-        {:ok, volunteer} ->
+        {:ok, _volunteer} ->
           assign(socket,
-            volunteers: [volunteer | socket.assigns.volunteers],
             changeset: Volunteers.change_volunteer(%Volunteer{})
           )
 
@@ -47,7 +47,29 @@ defmodule LiveViewStudioWeb.VolunteerLive do
     volunteer = Volunteers.get_volunteer!(id)
     Volunteers.update_volunteer(volunteer, %{checked_out: !volunteer.checked_out})
 
-    socket = assign(socket, volunteers: Volunteers.list_volunteers())
+    {:noreply, socket}
+  end
+
+  def handle_info({:volunteer_created, volunteer}, socket) do
+    {:noreply, assign(socket, volunteers: [volunteer | socket.assigns.volunteers])}
+  end
+
+  def handle_info({:volunteer_updated, %{id: id} = volunteer}, socket) do
+    socket =
+      update(
+        socket,
+        :volunteers,
+        fn volunteers ->
+          Enum.map(
+            volunteers,
+            fn
+              %{id: ^id} -> volunteer
+              v -> v
+            end
+          )
+        end
+      )
+
     {:noreply, socket}
   end
 end
