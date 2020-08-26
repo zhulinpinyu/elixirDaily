@@ -1,12 +1,20 @@
 <h1>志愿者签到</h1>
 <div id="checkin">
-  <%= f = form_for @changeset, "#", phx_submit: "save" %>
+  <%= f = form_for @changeset, "#", phx_submit: "save", phx_change: "validate" %>
     <div class="field">
-      <%= text_input f, :name, placeholder: "Name", autocomplete: "off" %>
+      <%= text_input f, :name,
+        placeholder: "Name",
+        autocomplete: "off",
+        phx_debounce: "1000"
+      %>
       <%= error_tag f, :name %>
     </div>
     <div class="field">
-      <%= telephone_input f, :phone, placeholder: "电话", autocomplete: "off" %>
+      <%= telephone_input f, :phone,
+        placeholder: "电话",
+        autocomplete: "off",
+        phx_debounce: "blur"
+      %>
       <%= error_tag f, :phone %>
     </div>
     <%= submit "添加", phx_disable_with: "正在保存..." %>
