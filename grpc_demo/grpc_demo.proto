@@ -1,0 +1,25 @@
+syntax="proto3";
+
+package grpc_demo;
+
+service User {
+  rpc Create (CreateRequest) returns (UserReply) {}
+  rpc Get (GetRequest) returns (UserReply) {}
+}
+
+message CreateRequest {
+  string name=1;
+  int32 age=2;
+  string birth=3;
+}
+
+message UserReply {
+  int32 id=1;
+  string name=2;
+  int32 age=3;
+  string birth=4;
+}
+
+message GetRequest {
+  int32 id=1;
+}
